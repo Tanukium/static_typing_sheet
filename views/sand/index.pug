@@ -1,0 +1,32 @@
+extends ../layout
+
+block script
+  script(type="text/javascript").
+    let makeTable = (rowNum, colNum) => { //関数を定義する
+        let table = document.getElementById("demo"); //HTML DOM getElementByIdメソッド： id="demo"のHTMLエレメントを探す
+        for( let i = 0; i < rowNum; i++ ){
+            let row = document.createElement("tr"); //HTML DOM createElementメソッド：<tr>エレメント（表の行）を作る
+            for( let j = 0; j < colNum; j++ ){
+                let cell = document.createElement("td"); //<td>エレメント（行の中のセル）を作る
+                let text = document.createElement("INPUT"); //<input>エレメント（入力エリア）を作る
+                text.setAttribute("type", "text"); //HTML DOM　setAttributeメソッド：エレメントの属性（attribute）をvar1, var2の形で設置する
+                text.setAttribute("size", "5");
+                //text.setAttribute("value", (i*10)+j+1);
+                cell.appendChild(text); //HTML　DOM　appendChildメソッド：変数のエレメント(text)を子ノードとして親ノードのオブジェクト(cell)の下に添付する
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+        }
+    };
+    window.onload = function(){
+        makeTable(3, 15); //Browserオブジェクトのwindow(DOMの一部)のonloadイベント(DOM Eventオブジェクト)：ページをロードし終わったらすぐmakeTableを実行する
+    }
+
+block content
+  h1 実験場
+  hr
+  p
+    table(id="demo")
+  hr
+  p
+    a(href="/", title="ホームページ") 前のページに戻る
