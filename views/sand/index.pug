@@ -18,8 +18,10 @@ block script
             table.appendChild(row);
         }
     };
+    let rowNum = "#{rowNum}";
+    let colNum = "#{colNum}";
     window.onload = function(){
-        makeTable(3, 15); //Browserオブジェクトのwindow(DOMの一部)のonloadイベント(DOM Eventオブジェクト)：ページをロードし終わったらすぐmakeTableを実行する
+        makeTable(rowNum, colNum); //Browserオブジェクトのwindow(DOMの一部)のonloadイベント(DOM Eventオブジェクト)：ページをロードし終わったらすぐmakeTableを実行する
     }
 
 block content
@@ -27,6 +29,15 @@ block content
   hr
   p
     table(id="demo")
+    br
+    form(action="#", method="post")
+      label 行：
+      input(type="text", name="row")
+      | 
+      label 列：
+      input(type="text", name="col")
+      | 
+      input(type="submit" value="生成")
   hr
   p
     a(href="/", title="ホームページ") 前のページに戻る
