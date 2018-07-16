@@ -26,12 +26,6 @@ app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
 app.use('/sand', sandRouter);
 
-app.post('/sand', function(req, res) {
-  console.log(req.body);
-  //res.send(`行数は${req.body.row}、列数は${req.body.col}`);
-  res.render('sand/index', { title: '実験場', rowNum: `${req.body.row}`, colNum: `${req.body.col}`});
-});
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

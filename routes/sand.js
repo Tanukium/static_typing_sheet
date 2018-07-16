@@ -3,7 +3,7 @@ let router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('sand/index', { title: '実験場', rowNum: 5, colNum: 6});
+  res.render('sand/index', { title: '実験場', row: `${req.query.row}`, col: `${req.query.col}`});
 });
 
 module.exports = router;
