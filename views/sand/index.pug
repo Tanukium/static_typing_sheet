@@ -2,13 +2,11 @@ extends ../layout
 
 block script
   script(type="text/javascript").
-    let test = () => {
-        alert("Test");
-    }
+    let test = () => { alert("Test"); };
 
 block content
-  h1 実験場
-  hr
+  :markdown-it
+    # 実験場
   p
     table(id="demo")
       - for( let i = 0; i < row; i++ )
@@ -27,6 +25,10 @@ block content
       input(type="text" name="col")
       | 
       input(type="submit" value="生成")
-  hr
-  p
-    a(href="/", title="ホームページ") 前のページに戻る
+  :markdown-it
+    
+    ***
+
+    [前のページに戻る][]
+
+    [前のページに戻る]: / "ホームページ"
