@@ -35,4 +35,8 @@ router.get('/180716', function(req, res) {
   res.render('blog/180716', { title: '開発日誌：180716' });
 });
 
+router.get('/180924', function(req, res) {
+  res.render('blog/180924', { title: '開発日誌：180924' });
+});
+
 module.exports = router;
