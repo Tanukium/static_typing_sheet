@@ -2,7 +2,17 @@ extends ../layout
 
 block script
   script(type="text/javascript").
-    let test = () => { alert("Test"); };
+    let saveTable = () => { 
+      let demoTable = document.getElementById('demo');
+      let valueOfTable = new Object;
+      for( let i = 0; i < #{row}; i++ ){
+        valueOfTable[i+':'+'-1'] = '\\r';
+        for( let j = 0; j < #{col}; j++){
+          valueOfTable[i+':'+j] = demoTable.getElementsByClassName(i+':'+j)[0].childNodes[0].value;
+        };
+      };
+      console.log(valueOfTable);
+    };
 
 block content
   :markdown-it
@@ -10,12 +20,12 @@ block content
   p
     table(id="demo")
       - for( let i = 0; i < row; i++ )
-          tr
-          - for( let j = 0; j < col; j++)
-              td(class=i+':'+j)
-                input(type="text" size="5")
+        tr
+        - for( let j = 0; j < col; j++)
+          td(class=i+':'+j)
+            input(type="text" size="5")
     br
-    button(onclick="test()") 保存
+    button(onclick="saveTable()") 保存
   p
     form(action="#" method="get")
       label 行：
