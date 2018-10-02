@@ -27,7 +27,7 @@ block content
           td(class=i+':'+j)
             input(type="text" size="5")
     br
-    button(onclick="console.log(saveTable());") 保存
+    button(onclick="$.post('/csv',saveTable());") 保存
   p
     form(action="#" method="get")
       label 行：
