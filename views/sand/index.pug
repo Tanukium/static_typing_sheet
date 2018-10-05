@@ -5,15 +5,27 @@ block script
     let saveTable = () => { 
       let demoTable = document.getElementById('demo');
       let cell = new Object;
-      let value = new Object;
-      for( let i = 0; i < #{row}; i++ ){
-        value[i+':'+'-1'] = '\\r';
-        for( let j = 0; j < #{col}; j++){
+      let table = {row: #{row}, col: #{col}};
+      for(let i = 0; i < #{row}; i++ ){
+        for(let j = 0; j < #{col}; j++){
           cell = demoTable.getElementsByClassName(i+':'+j)[0];
-          value[i+':'+j] = cell.childNodes[0].value;
+          table[i+':'+j] = cell.childNodes[0].value;
         };
       };
-      return(value);
+      return(table);
+    };
+    let downloadFile = (options) => {
+      let config = $.extend(true, {method: 'post'}, options);
+      let $iframe = $('<iframe id="down-file-iframe" />');
+      let $form = $('<form target="down-file-iframe" method="' + config.method + '" />');
+      $form.attr('action', config.url);
+      for (let key in config.data) {
+        $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
+      }
+      $iframe.append($form);
+      $(document.body).append($iframe);
+      $form[0].submit();
+      $iframe.remove();
     };
 
 block content
@@ -27,7 +39,7 @@ block content
           td(class=i+':'+j)
             input(type="text" size="5")
     br
-    button(onclick="$.post('/csv',saveTable());") 保存
+    button(onclick="$.post('/csv', downloadFile({url: '/csv', data: saveTable()}));") 保存
   p
     form(action="#" method="get")
       label 行：
