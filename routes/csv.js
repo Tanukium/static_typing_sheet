@@ -1,5 +1,6 @@
 let express = require('express');
 let router = express.Router();
+let iconv = require('iconv-lite');
 
 router.post('/', function (req, res) {
   let tableToCsv = () => {
@@ -11,13 +12,15 @@ router.post('/', function (req, res) {
       }
       str += arr.join(",") + "\n";
     }
-    return (str);
+    return(str);
   }
+
+  let buf = iconv.encode(tableToCsv(), 'sjis');
   res.set({
     'Content-disposition': 'attachment; filename=save.csv',
-    'Content-Type': 'text/csv'
+    'Content-Type': 'text/csv; encoding=Shift_JIS'
   });
-  res.send(tableToCsv());
+  res.send(buf);
 });
 
 module.exports = router;
