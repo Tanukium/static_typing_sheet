@@ -2,14 +2,16 @@ extends ../layout
 
 block script
   script(type="text/javascript").
+    globalindex = ['名前', '学年', '性別', '単位数'];
+
     let saveTable = () => { 
       let demoTable = document.getElementById('demo');
-      let cell = new Object;
-      let table = {row: #{row}, col: #{col}};
+      let table = {index: globalindex, row: #{row}};
+      let textarea = new Object;
       for(let i = 0; i < #{row}; i++ ){
-        for(let j = 0; j < #{col}; j++){
-          cell = demoTable.getElementsByClassName(i+':'+j)[0];
-          table[i+':'+j] = cell.childNodes[0].value;
+        for(let j = 0; j < 4; j++){
+          textarea = demoTable.getElementsByClassName(i+':'+j)[0];
+          table[i+':'+j] = textarea.value;
         };
       };
       return(table);
@@ -30,27 +32,60 @@ block script
       $iframe.remove();
     };
 
+    let textClassCheck = (item) => {
+      if((item.id == "名前" || item.id == "性別") && Number(item.id)!=NaN) {
+        item.value = ""
+      }
+      if((item.id == "学年" || item.id == "単位数") && Number(item.id)==NaN) {
+        item.value = ""
+      }
+    };
+
+    $(()=>{
+      let textarea = new Object;
+      for(let i = 0; i < #{row}; i++){
+        for(let j = 0; j < 4; j++){
+          textarea = $("input."+i+"\\:"+j);
+          textarea.on("change", ()=> {
+            //alert("Hello!");
+            textClassCheck(textarea[0]);
+          });
+        }
+      }
+    });
+
 block content
+  - let index = ['名前', '学年', '性別', '単位数'];
   :markdown-it
     # 実験場
   p
-    table(id="demo")
-      - for( let i = 0; i < row; i++ )
+    table(id='demo')
+      tr
+        td= index[0]
+        td= index[1]
+        td= index[2]
+        td= index[3]
+      - for(let i = 0; i < row; i++)
         tr
-        - for( let j = 0; j < col; j++)
-          td(class=i+':'+j)
-            input(type="text" size="5")
+        - for( let j = 0; j < 4; j++)
+          td
+            if j == 0
+              input(id=index[0] class=i+':'+j type="text" size="5")
+            else if j == 1
+              input(id=index[1] class=i+':'+j type="text" size="5")
+            else if j == 2
+              input(id=index[2] class=i+':'+j type="text" size="5")
+            else if j == 3
+              input(id=index[3] class=i+':'+j type="text" size="5")
+              
     br
-    button(onclick="downloadFile({url: '/csv', data: saveTable()});") 保存
+    button(onclick='downloadFile({url: "/csv", data: saveTable()});') 保存
   p
-    form(action="#" method="get")
-      label 行：
-      input(type="text" name="row")
+    form(action='#' method='get')
+      label 行数：
+      input(type='text' name='row')
       | 
-      label 列：
-      input(type="text" name="col")
-      | 
-      input(type="submit" value="生成")
+      input(type='submit' value='生成')
   :markdown-it
     
     ***
