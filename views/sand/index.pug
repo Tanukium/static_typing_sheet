@@ -5,13 +5,13 @@ block script
     globalindex = ['名前', '学年', '性別', '単位数'];
 
     let saveTable = () => { 
-      let demoTable = document.getElementById('demo');
+      let demoTable = $('#demo');
       let table = {index: globalindex, row: #{row}};
-      let textarea = new Object;
+      let input = new Object;
       for(let i = 0; i < #{row}; i++ ){
-        for(let j = 0; j < 4; j++){
-          textarea = demoTable.getElementsByClassName(i+':'+j)[0];
-          table[i+':'+j] = textarea.value;
+        for(let j = 0; j < globalindex.length; j++){
+          input = demoTable[0].getElementsByClassName(i+':'+j)[0];
+          table[i+':'+j] = input.value;
         };
       };
       return(table);
@@ -32,26 +32,23 @@ block script
       $iframe.remove();
     };
 
-    let textClassCheck = (item) => {
-      if((item.id == "名前" || item.id == "性別") && Number(item.id)!=NaN) {
-        item.value = ""
-      }
-      if((item.id == "学年" || item.id == "単位数") && Number(item.id)==NaN) {
-        item.value = ""
-      }
-    };
-
     $(()=>{
-      let textarea = new Object;
-      for(let i = 0; i < #{row}; i++){
-        for(let j = 0; j < 4; j++){
-          textarea = $("input."+i+"\\:"+j);
-          textarea.on("change", ()=> {
-            //alert("Hello!");
-            textClassCheck(textarea[0]);
-          });
-        }
-      }
+      let inputClassCheck = (item) => {
+        if((item.id === globalindex[0] || item.id === globalindex[2]) &&
+         !Number.isNaN(Number(item.value))) {
+          item.value = ""
+        } else if((item.id == globalindex[1] || item.id == globalindex[3]) && 
+        Number.isNaN(Number(item.value))) {
+          item.value = ""
+        };
+      };
+      let inputs = Array.from($("#demo")[0].getElementsByTagName("input"));
+      inputs.forEach((input) => {
+        $(input).on("change", ()=> {
+          //console.log($(input)[0].value);
+          inputClassCheck($(input)[0]);
+        });
+      });
     });
 
 block content
