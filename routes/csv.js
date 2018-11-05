@@ -2,13 +2,13 @@ let express = require('express');
 let router = express.Router();
 let iconv = require('iconv-lite');
 
-router.post('/', function (req, res) {
+router.post('/', (req, res) => {
   let tableToCsv = () => {
     let str = '';
     str += req.body.index + `\n`;
     for (i = 0; i < req.body.row; i++) {
       let arr = [];
-      for (j = 0; j < 4; j++) {
+      for (j = 0; j < req.body.col; j++) {
         arr.push(req.body[i+':'+j]);
       }
       str += arr.join(',') + `\n`;

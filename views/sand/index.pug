@@ -5,12 +5,11 @@ block script
     globalindex = ['名前', '学年', '性別', '単位数'];
 
     let saveTable = () => { 
-      let demoTable = $('#demo');
-      let table = {index: globalindex, row: #{row}};
+      let table = {index: globalindex, row: #{row}, col: globalindex.length};
       let input = new Object;
       for(let i = 0; i < #{row}; i++ ){
         for(let j = 0; j < globalindex.length; j++){
-          input = demoTable[0].getElementsByClassName(i+':'+j)[0];
+          input = $('.'+i+'\\:'+j)[0];
           table[i+':'+j] = input.value;
         };
       };
@@ -36,13 +35,13 @@ block script
       let inputClassCheck = (item) => {
         if((item.id === globalindex[0] || item.id === globalindex[2]) &&
          !Number.isNaN(Number(item.value))) {
-          item.value = ""
-        } else if((item.id == globalindex[1] || item.id == globalindex[3]) && 
+          item.value = null;
+        } else if((item.id === globalindex[1] || item.id === globalindex[3]) && 
         Number.isNaN(Number(item.value))) {
-          item.value = ""
+          item.value = null;
         };
       };
-      let inputs = Array.from($("#demo")[0].getElementsByTagName("input"));
+      let inputs = Array.from($("#demo input"));
       inputs.forEach((input) => {
         $(input).on("change", ()=> {
           //console.log($(input)[0].value);
@@ -64,7 +63,7 @@ block content
         td= index[3]
       - for(let i = 0; i < row; i++)
         tr
-        - for( let j = 0; j < 4; j++)
+        - for( let j = 0; j < index.length; j++)
           td
             if j == 0
               input(id=index[0] class=i+':'+j type="text" size="5")
