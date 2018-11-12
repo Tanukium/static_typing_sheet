@@ -5,8 +5,13 @@ block script
     globalindex = ['名前', '学年', '性別', '単位数'];
 
     let saveTable = () => { 
-      let table = {index: globalindex, row: #{row}, col: globalindex.length};
+      let table = {
+        index: globalindex, 
+        row: #{row}, 
+        col: globalindex.length
+      };
       let input = new Object;
+      
       for(let i = 0; i < #{row}; i++ ){
         for(let j = 0; j < globalindex.length; j++){
           input = $('.'+i+'\\:'+j)[0];
@@ -32,15 +37,31 @@ block script
     };
 
     $(()=>{
+      let nameCheck = (str) => {
+        return(str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/)) ? false : true
+      };
+      let semiCheck = (str) => {
+        return(str.match(/^1$|^2$|^3$|^4$/)) ? false : true
+      };
+      let genderCheck = (str) => {
+        return(str.match(/^\u7537$|^\u5973$/)) ? false : true
+      };
+      let creditCheck = (str) => {
+        return(str.match(/^12[0-5]$|^1[0-1][0-9]$|^[1-9][0-9]$|^[0-9]$/)) ? false : true
+      };
+
       let inputClassCheck = (item) => {
-        if((item.id === globalindex[0] || item.id === globalindex[2]) &&
-         !Number.isNaN(Number(item.value))) {
+        if (item.id === globalindex[0] && nameCheck(item.value)) {
           item.value = null;
-        } else if((item.id === globalindex[1] || item.id === globalindex[3]) && 
-        Number.isNaN(Number(item.value))) {
+        } else if (item.id === globalindex[1] && semiCheck(item.value)) {
+          item.value = null;
+        } else if (item.id === globalindex[2] && genderCheck(item.value)) {
+          item.value = null;
+        } else if (item.id === globalindex[3] && creditCheck(item.value)) {
           item.value = null;
         };
       };
+
       let inputs = Array.from($("#demo input"));
       inputs.forEach((input) => {
         $(input).on("change", ()=> {
@@ -66,7 +87,7 @@ block content
         - for( let j = 0; j < index.length; j++)
           td
             if j == 0
-              input(id=index[0] class=i+':'+j type="text" size="5")
+              input(id=index[0] class=i+':'+j type="text" size="9")
             else if j == 1
               input(id=index[1] class=i+':'+j type="text" size="5")
             else if j == 2
