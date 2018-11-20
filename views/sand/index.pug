@@ -11,7 +11,7 @@ block script
         col: globalindex.length
       };
       let input = new Object;
-      
+
       for(let i = 0; i < #{row}; i++ ){
         for(let j = 0; j < globalindex.length; j++){
           input = $('.'+i+'\\:'+j)[0];
@@ -41,10 +41,10 @@ block script
         return(str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/)) ? false : true
       };
       let semiCheck = (str) => {
-        return(str.match(/^1$|^2$|^3$|^4$/)) ? false : true
+        return(str.match(/^[1-4]$/)) ? false : true
       };
       let genderCheck = (str) => {
-        return(str.match(/^\u7537$|^\u5973$/)) ? false : true
+        return(str.match(/^[\u7537\u5973]$/)) ? false : true
       };
       let creditCheck = (str) => {
         return(str.match(/^12[0-5]$|^1[0-1][0-9]$|^[1-9][0-9]$|^[0-9]$/)) ? false : true
@@ -75,34 +75,31 @@ block content
   - let index = ['名前', '学年', '性別', '単位数'];
   :markdown-it
     # 実験場
-  p
-    table(id='demo')
+  table(id='demo')
+    tr
+      td= index[0]
+      td= index[1]
+      td= index[2]
+      td= index[3]
+    - for(let i = 0; i < row; i++)
       tr
-        td= index[0]
-        td= index[1]
-        td= index[2]
-        td= index[3]
-      - for(let i = 0; i < row; i++)
-        tr
-        - for( let j = 0; j < index.length; j++)
-          td
-            if j == 0
-              input(id=index[0] class=i+':'+j type="text" size="9")
-            else if j == 1
-              input(id=index[1] class=i+':'+j type="text" size="5")
-            else if j == 2
-              input(id=index[2] class=i+':'+j type="text" size="5")
-            else if j == 3
-              input(id=index[3] class=i+':'+j type="text" size="5")
-              
-    br
-    button(onclick='downloadFile({url: "/csv", data: saveTable()});') 保存
-  p
-    form(action='#' method='get')
-      label 行数：
-      input(type='text' name='row')
-      | 
-      input(type='submit' value='生成')
+      - for( let j = 0; j < index.length; j++)
+        td
+          if j == 0
+            input(id=index[0] class=i+':'+j type="text" size="10")
+          else if j == 1
+            input(id=index[1] class=i+':'+j type="text" size="5")
+          else if j == 2
+            input(id=index[2] class=i+':'+j type="text" size="5")
+          else if j == 3
+            input(id=index[3] class=i+':'+j type="text" size="5")
+  br
+  form(action='#' method='get')
+    label 行数：
+    input(type='text' name='row')
+    | 
+    input(type='submit' value='生成')
+  button(onclick='downloadFile({url: "/csv", data: saveTable()});') 保存
   :markdown-it
     
     ***
