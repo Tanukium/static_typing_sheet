@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Tanukium/hsemi#readme",
   "dependencies": {
+    "acorn": "^6.0.4",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "^4.16.4",
