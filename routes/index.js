@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 
 /* GET home page. */
-router.get('/', (req, res) => {
+router.get('/', function(req, res) {
   res.render('index', { title: 'シュクの表計算Webアプリ開発ブログ' });
 });
 

@@ -2,7 +2,7 @@ let express = require('express');
 let router = express.Router();
 let iconv = require('iconv-lite');
 
-router.post('/', (req, res) => {
+router.post('/', function(req, res) {
   let tableToCsv = () => {
     let str = '';
     str += req.body.index + `\n`;
