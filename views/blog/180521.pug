@@ -1,4 +1,14 @@
 extends ../layout
 
+block jumbotron
+  h1 180521：Dockerを使ってサーバを動かす 
+  p. 
+    Windows上のDockerでapache、nodejsを実行することで簡単なサーバを動かした。
+    #[br]
+    DockerToolboxを使うので、あらかじめデータボリュームを設置する必要である。
+
 block content
   include:markdown-it .md/180521.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る

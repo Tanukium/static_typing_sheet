@@ -1,4 +1,14 @@
 extends ../layout
 
+block jumbotron
+  h1 181029: データベース型の入力方式を開発
+  p.
+    これまで筆者はずっと表をCSVファイルとして保存する機能を開発していたが、先生からのスケジュールに関する助言を得た上で、表自体の開発にそろそろ突入しようと決意した。
+    #[br]
+    本節では、第一部分の「表の入力」、いわゆる「データベース型の入力方式」の開発過程を説明する。
+
 block content
   include:markdown-it .md/181029.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る

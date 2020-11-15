@@ -1,4 +1,27 @@
 extends ../layout
 
+block jumbotron
+  h1 180702：ビルエンジンをejsからpugへ移行する
+  p.
+    先生のアドバイスを受けて、中間発表のあと私はまずview engineをejsからpugへ切り替え始めた。
+    #[br]
+    一番簡単な仕事だからそれを最初にやり始めた（うそ）。
+  p.
+    Pugというエンジンは、ejsとは違ってHTML文法との互換性をほぼ捨て切れた。
+    #[br]  
+    そして文法の中に、ものすごくたくさんの糖衣構文（シンタックスシュガー）が入ったので、
+    #[br]
+    初心者はまずmarkdown言語を勉強するときのようにマニュアルを読みながら構文を書くんだが、
+    #[br]
+    だいたい２〜３時間を経ったら凄くはやくHTMLのページを作れるようになる、とそんな気がする。
+    #[br]
+    さらに神みたいな構文：「`extends`」、「`include`」と「`:`」があるので、
+    #[br]
+    前のようにわざわざpandocを使ってmarkdownファイルずつhtmlファイルを転換する苦労はなくなった。バンザイー。
+  p では、Pugの基本文法（本サイトでの応用）とその三つの神構文をそれぞれ説明しよう。
+
 block content
   include:markdown-it .md/180702.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る

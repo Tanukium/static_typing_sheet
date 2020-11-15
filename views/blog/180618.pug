@@ -1,4 +1,10 @@
 extends ../layout
 
+block jumbotron
+  h1 180618：Bootstrapを導入して、本格開発の初めての一歩を踏み出す
+
 block content
   include:markdown-it .md/180618.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る

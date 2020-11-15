@@ -1,0 +1,122 @@
+extends ../layout
+
+block jumbotron
+  h1 静的型付け表を作成しよう
+
+block script
+  script(type="text/javascript").
+    globalindex = ['名前', '学年', '性別', '単位数'];
+
+    let saveTable = () => { 
+      let table = {
+        index: globalindex, 
+        row: #{row}, 
+        col: globalindex.length
+      };
+      let input = new Object;
+
+      for(let i = 0; i < #{row}; i++ ){
+        for(let j = 0; j < globalindex.length; j++){
+          input = $('#'+i+'\\:'+j);
+          table[i+':'+j] = input[0].value;
+        };
+      };
+      return(table);
+    };
+
+    function downloadFile (options) {
+      let config = $.extend(true, {method: 'post'}, options);
+      let $iframe = $('<iframe id="down-file-iframe" />');
+      let $form = $('<form target="down-file-iframe" />');
+      $form.attr('method', config.method);
+      $form.attr('action', config.url);
+      for (let key in config.data) {
+        $form.append('<input type="hidden" name="' + key + '" value="' + config.data[key] + '" />');
+      }
+      $iframe.append($form);
+      $(document.body).append($iframe);
+      $form[0].submit();
+      $iframe.remove();
+    };
+
+    $(function() {
+      let nameCheck = (str) => {
+        return(str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/)) ? false : true
+      };
+      let semiCheck = (str) => {
+        return(str.match(/^[1-4]$/)) ? false : true
+      };
+      let genderCheck = (str) => {
+        return(str.match(/^[\u7537\u5973]$/)) ? false : true
+      };
+      let creditCheck = (str) => {
+        return(str.match(/^12[0-5]$|^1[0-1][0-9]$|^[1-9][0-9]$|^[0-9]$/)) ? false : true
+      };
+
+      function inputClassCheck(item) {
+        if (item.attr('class') === globalindex[0] && nameCheck(item[0].value)) {
+          item[0].value = null;
+        } else if (item.attr('class') === globalindex[1] && semiCheck(item[0].value)) {
+          item[0].value = null;
+        } else if (item.attr('class') === globalindex[2] && genderCheck(item[0].value)) {
+          item[0].value = null;
+        } else if (item.attr('class') === globalindex[3] && creditCheck(item[0].value)) {
+          item[0].value = null;
+        };
+      };
+
+      let inputs = Array.from($("#demo input"));
+      inputs.forEach(function(input) {
+        $(input).on("change", function() {
+          //console.log($(input).attr('class'));
+          inputClassCheck($(input));
+        });
+      });
+    });
+
+block content
+  - let index = ['名前', '学年', '性別', '単位数'];
+  .container
+    p.lead
+    table#demo(class='table')
+      thead.thead-light
+        tr
+          td(scope="col")= index[0]
+          td(scope="col")= index[1]
+          td(scope="col")= index[2]
+          td(scope="col")= index[3]
+      tbody
+        - for(let i = 0; i < row; i++)
+          if i % 2 == 0
+            tr.table-secondary
+              - for( let j = 0; j < index.length; j++)
+                td
+                  if j == 0
+                    input(class=index[0] id=i+':'+j type="text" size="10")
+                  else if j == 1
+                    input(class=index[1] id=i+':'+j type="text" size="5")
+                  else if j == 2
+                    input(class=index[2] id=i+':'+j type="text" size="5")
+                  else if j == 3
+                    input(class=index[3] id=i+':'+j type="text" size="5")
+          else
+            tr
+              - for( let j = 0; j < index.length; j++)
+                td
+                  if j == 0
+                    input(class=index[0] id=i+':'+j type="text" size="10")
+                  else if j == 1
+                    input(class=index[1] id=i+':'+j type="text" size="5")
+                  else if j == 2
+                    input(class=index[2] id=i+':'+j type="text" size="5")
+                  else if j == 3
+                    input(class=index[3] id=i+':'+j type="text" size="5")
+  .container
+    p.lead
+    form(action='#' method='get')
+      label 行数：
+      input(type='text' name='row')
+      input(class="btn btn-primary btn-sm" type='submit' value='生成')
+  .container
+    p.lead
+    button(class="btn btn-success" onclick='downloadFile({url: "/csv", data: saveTable()});') 保存

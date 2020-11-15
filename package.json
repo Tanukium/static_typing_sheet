@@ -1,24 +1,24 @@
 {
-  "name": "hsemi",
-  "version": "0.1.0",
+  "name": "sts",
+  "version": "1.0",
   "description": "",
   "main": "app.js",
   "private": true,
   "scripts": {
-    "start": "node-dev ./bin/www"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tanukium/hsemi.git"
   },
-  "author": "j15754",
+  "author": "Tanukium",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Tanukium/hsemi/issues"
+    "url": "https://github.com/Tanukium/sts/issues"
   },
-  "homepage": "https://github.com/Tanukium/hsemi#readme",
+  "homepage": "https://github.com/Tanukium/sts#readme",
   "dependencies": {
-    "acorn": "^6.4.1",
+    "acorn": "^6.4.2",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
     "express": "^4.17.1",

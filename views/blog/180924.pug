@@ -1,4 +1,10 @@
 extends ../layout
 
+block jumbotron
+  h1 180924：テーブルを保存する機能を添付する
+
 block content
   include:markdown-it .md/180924.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る

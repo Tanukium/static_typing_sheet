@@ -1,4 +1,18 @@
 extends ../layout
 
+block jumbotron
+  h1 180604：Node.jsとExpressの初歩的な配置
+  p. 
+    JSで卒論のアプリを開発することになったので適合のフレームワークを探してみた。
+    #[br]
+    ググったら、いろんな紹介を見て、最後に先生のおすすめと同じくNode.js + Expressの組合せを使うことにした。  
+    #[br]
+    今度インストールから簡単なサイトの作り方、簡単なルータ配置までまとめてみようとする。
+
+
+
 block content
   include:markdown-it .md/180604.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る

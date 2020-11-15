@@ -1,4 +1,20 @@
 extends ../layout
 
+block jumbotron
+  h1 181008: 表をCSV仕様で保存する
+  p.
+    前節では、表をObjectオブジェクトとして転換する（表をページから読み取ってからObjectオブジェクトを返す）という機能を有する関数を初歩的に設計した。  
+    #[br]
+    本節では、表をCSV仕様で保存する機能が実現できたまで  
+  :markdown-it
+    * AJAX方式のPOSTメソッドを導入する試し
+    * サーバ側にObjectオブジェクトをCSV仕様の文字列に転換させる
+    * AJAX方式の欠陥を発見し、代わりにiframeを使用する
+    * CSVファイルの文字化けの問題を解決する
+  p などの出来事を逐一説明しようとする。
+
 block content
   include:markdown-it .md/181008.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る

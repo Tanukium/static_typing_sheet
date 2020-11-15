@@ -1,4 +1,20 @@
 extends ../layout
 
+block jumbotron
+  h1 181112: 本格のセルの「静的型付け」機能を開発
+  p.
+    前節では、筆者がデータベース方式、つまり「見出し行を固定させ、列を任意に生成し中のセルに入力する」という表の入力機能を開発した。
+    #[br]
+    それと同時に、簡単なセルの「静的型付け」機能`inputClassCheck()`メソッドをも作成したが、それはまだ完備していなかったと先生からの指摘を受けた。
+    #[br]
+    本節では、筆者が主に以下の二つの事項を説明する：  
+  :markdown-it
+    1. `sand/index.pug`におけるプログラムの記法を全部jQuery化にすること
+    2. 正規表現を導入し、それを使用し本格のセルの「静的型付け」機能を開発すること
+  p 以上の機能の開発ができ、テストにおいても問題が出現しなければ、本研究は初歩的な成功を収めるであろう。
+
 block content
   include:markdown-it .md/181112.md
+  .container
+    p.lead
+    a(class="btn btn-secondary" href="/blog" role="button") 戻る
