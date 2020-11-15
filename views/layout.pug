@@ -11,10 +11,10 @@ html(lang="ja")
       script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous")
-      script(src="/js/bootstrap.bundle.min.js")
+      script(src="/public/js/bootstrap.bundle.min.js")
     block style
-      link(href='/css/bootstrap.min.css' rel="stylesheet")
-      link(href="/css/style.css" rel="stylesheet")
+      link(href='/public/css/bootstrap.min.css' rel="stylesheet")
+      link(href="/public/css/style.css" rel="stylesheet")
     block script
 
   body(class='d-flex flex-column h-100')
@@ -28,12 +28,12 @@ html(lang="ja")
           div#navbarCollapse(class="collapse navbar-collapse")
             ul(class="navbar-nav mr-auto")
               li(class="nav-item active")
-                a.nav-link(href="/") ホーム
+                a.nav-link(href="/sts") ホーム
                   span.sr-only (current)
               li.nav-item
-                a.nav-link(href="/app") アプリ
+                a.nav-link(href="/sts/app") アプリ
               li.nav-item
-                a.nav-link(href="/blog") 開発日誌
+                a.nav-link(href="/sts/blog") 開発日誌
               li.nav-item
                 a.nav-link(href="/") Excel->CSV
     main.flex-shrink-0(role="main")

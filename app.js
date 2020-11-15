@@ -21,10 +21,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/blog', blogRouter);
-app.use('/app', appRouter);
-app.use('/csv', csvRouter);
+app.use('/sts', indexRouter);
+app.use('/sts/blog', blogRouter);
+app.use('/sts/app', appRouter);
+app.use('/sts/csv', csvRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
