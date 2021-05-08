@@ -20,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// for debugging, use the next line
+//app.use('/public', express.static(__dirname + '/public'));
 
 app.use('/sts', indexRouter);
 app.use('/sts/blog', blogRouter);

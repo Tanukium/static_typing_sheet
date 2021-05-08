@@ -6,6 +6,7 @@
 
 let app = require('../app');
 let debug = require('debug')('sts:server');
+// for debugging, use HTTP
 //let http = require('http');
 const https = require('https');
 const fs = require('fs');
@@ -27,6 +28,7 @@ const options = {
 };
 
 //let server = http.createServer(app);
+// for debugging, use the line above
 let server = https.createServer(options, app);
 
 /**

@@ -7,7 +7,7 @@ block script
   script(type="text/javascript").
     globalindex = ['名前', '学年', '性別', '単位数'];
 
-    let saveTable = () => { 
+    let saveTable = () => {
       let table = {
         index: globalindex, 
         row: #{row}, 
@@ -38,6 +38,16 @@ block script
       $form[0].submit();
       $iframe.remove();
     };
+
+    function inputValueCheck() {
+      let obj = $('#rowVal')[0]
+      if (!isNumber(obj.value)) {
+        alert("最大100までの数字を入力してください");
+        obj.value = null;
+      }
+    }
+  
+    function isNumber(str) { var rul = /^[0-9]$|^[1-9][0-9]$|^100$|^$/; return rul.test(str); }
 
     $(function() {
       let nameCheck = (str) => {
@@ -115,7 +125,7 @@ block content
     p.lead
     form(action='#' method='get')
       label 行数：
-      input(type='text' name='row')
+      input(id="rowVal" type='text' name='row' onblur='inputValueCheck()')
       input(class="btn btn-primary btn-sm" type='submit' value='生成')
   .container
     p.lead
